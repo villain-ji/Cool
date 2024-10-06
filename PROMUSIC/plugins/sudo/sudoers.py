@@ -5,8 +5,8 @@ from strings import get_string, helpers
 from PROMUSIC import app
 from pyrogram.types import InputMediaVideo
 from pyrogram.errors import UserNotParticipant
-from PROMUSIC.misc import SUDOERS, SUBSCRIBERS
-from PROMUSIC.utils.database import add_sudo, remove_sudo, add_sub, remove_sub, get_all_subscribers, add_points, remove_points, get_subscriber_data, subscribersdb
+from PROMUSIC.misc import SUDOERS
+from PROMUSIC.utils.database import add_sudo, remove_sudo
 from PROMUSIC.utils.decorators.language import language
 from PROMUSIC.utils.extraction import extract_user
 from PROMUSIC.utils.inline import close_markup
