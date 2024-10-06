@@ -150,10 +150,10 @@ async def braodcast_message(client, message, _):
             pass
     IS_BROADCASTING = False
 
-    await app.send_message(
-                chat_id=SUB_LOG,
-                text=f"#owner \n\n{message.from_user.mention} Jᴜsᴛ Bʀᴏᴀᴅᴄᴀsᴛ ᴀ ᴍᴇssᴀɢᴇ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
-            )
+    # await app.send_message(
+    #             chat_id=SUB_LOG,
+    #             text=f"#owner \n\n{message.from_user.mention} Jᴜsᴛ Bʀᴏᴀᴅᴄᴀsᴛ ᴀ ᴍᴇssᴀɢᴇ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
+    #         )
 
 
 async def auto_clean():
