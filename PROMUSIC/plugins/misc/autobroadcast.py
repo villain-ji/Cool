@@ -3,8 +3,9 @@ import datetime
 from PROMUSIC import app
 from pyrogram import Client
 from config import START_IMG_URL, IMG_URL
-from PROMUSIC.utils.database import get_served_chats
+from PROMUSIC.utils.database import get_served_chats, get_served_users
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import FloodWait
 
 
 MESSAGE = f"""**๏ ᴛʜɪs ɪs ᴛʜᴇ ᴀᴅᴠᴀɴᴄᴇ ᴍᴜsɪᴄ ᴘʟᴀʏᴇʀ + ᴍᴀɴᴀɢᴇᴍɴᴇᴛ ʀᴏʙᴏᴛ 💗. 💌
@@ -32,6 +33,7 @@ BD_VID = "https://telegra.ph/file/943bb99829ec526c3f99a.mp4"
 async def send_message_to_chats():
     try:
         chats = await get_served_chats()
+        users = await get_served_users()
 
         for chat_info in chats:
             chat_id = chat_info.get('chat_id')
@@ -39,9 +41,21 @@ async def send_message_to_chats():
                 try:
                     # await app.send_photo(chat_id, video=BD_VID, caption=MESSAGE, reply_markup=BUTTON)
                     await app.send_photo(chat_id, photo=IMG_URL, caption=MESSAGE, reply_markup=BUTTON)
-                    await asyncio.sleep(3)  # Sleep for 1 second between sending messages
+                    await asyncio.sleep(0.2)  # Sleep for 0.2 second between sending messages
                 except Exception as e:
                     pass  # Do nothing if an error occurs while sending message
+
+        # Send message to users
+        for user in users:
+            user_id = int(user["user_id"])
+            try:
+                await app.send_photo(user_id, photo=IMG_URL, caption=MESSAGE, reply_markup=BUTTON)
+                await asyncio.sleep(0.2)  # Sleep for 0.2 seconds to avoid FloodWait
+            except FloodWait as fw:
+                await asyncio.sleep(fw.value)
+            except Exception:
+                continue
+
     except Exception as e:
         pass  # Do nothing if an error occurs while fetching served chats
 async def continuous_broadcast():
