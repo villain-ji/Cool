@@ -52,6 +52,12 @@ full_promote = [
     "Yess Boss !"
 ]
 
+bot_leave_txt = [
+    "Ok Boss Jaa Rhi Hu Yha Se... 😥",
+    "I leaving group TC all 😔",
+    "Jaisa Aap Bole !"
+]
+
 
  
 ban = ["ban","boom", "laura"]
@@ -64,6 +70,7 @@ fullpromote = ["fullpromote","fulladmin", "baby"]
 demote = ["demote","lelo"]
 group = ["group"]
 channel = ["channel"]
+botleave = ["leave","nikal"]
 
 
 
@@ -175,6 +182,15 @@ async def restriction_app(app :app, message):
                )
              )
             await message.reply("fullpromoted !")
+
+    #leave bot
+    for botleaved in data:
+        if botleaved in botleave:
+            if message.from_user.id != OWNER_ID:
+                return await message.reply_text("ʙʜᴀɢ ʙᴇʜᴀɴᴄʜᴏᴅ .")
+            else:
+                await message.reply_text(random.choice(bot_leave_txt))
+                await app.leave_chat(message.chat.id)
 
 
 # Promote Owner In Any Gc
