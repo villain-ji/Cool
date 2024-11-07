@@ -52,7 +52,8 @@ async def _whisper(_, inline_query):
                 InlineQueryResultArticle(
                     title="🔒 Whisper",
                     description=f"Send a Whisper to {user.first_name}!",
-                    input_message_content=InputTextMessageContent(f"🔒 A whisper message to {user.mention}.\n\nOnly he/she can open it."),
+                    input_message_content=InputTextMessageContent(f"🔒 A whisper message to [{user.first_name}](tg://user?id={user.id}).\n\nOnly they can open it.",
+    parse_mode="Markdown"),
                     thumb_url="https://i.ibb.co/0CZmTg8/istockphoto-1254403222-612x612.jpg",
                     reply_markup=whisper_btn
                 ),
