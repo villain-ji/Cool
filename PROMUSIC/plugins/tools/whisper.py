@@ -47,19 +47,19 @@ async def _whisper(_, inline_query):
         
         try:
             whisper_btn = InlineKeyboardMarkup([[InlineKeyboardButton("show message 🔐", callback_data=f"fdaywhisper_{inline_query.from_user.id}_{user.id}")]])
-            one_time_whisper_btn = InlineKeyboardMarkup([[InlineKeyboardButton("📩 One-Time Whisper", callback_data=f"fdaywhisper_{inline_query.from_user.id}_{user.id}_one")]])
+            one_time_whisper_btn = InlineKeyboardMarkup([[InlineKeyboardButton("show message 🔐", callback_data=f"fdaywhisper_{inline_query.from_user.id}_{user.id}_one")]])
             mm = [
                 InlineQueryResultArticle(
                     title="🔒 Whisper",
                     description=f"Send a Whisper to {user.first_name}!",
-                    input_message_content=InputTextMessageContent(f"🔒 A whisper message to {user.first_name}.\n\nOnly he/she can open it."),
+                    input_message_content=InputTextMessageContent(f"🔒 A whisper message to {user.mention}.\n\nOnly he/she can open it."),
                     thumb_url="https://i.ibb.co/0CZmTg8/istockphoto-1254403222-612x612.jpg",
                     reply_markup=whisper_btn
                 ),
                 InlineQueryResultArticle(
                     title="📩 One-Time Whisper",
                     description=f"Send a one-time whisper to {user.first_name}!",
-                    input_message_content=InputTextMessageContent(f"📩 A one-time whisper message to {user.first_name}.\n\nOnly he/she can open it."),
+                    input_message_content=InputTextMessageContent(f"📩 A one-time whisper message to {user.mention}.\n\nOnly he/she can open it."),
                     thumb_url="https://i.ibb.co/0CZmTg8/istockphoto-1254403222-612x612.jpg",
                     reply_markup=one_time_whisper_btn
                 )
