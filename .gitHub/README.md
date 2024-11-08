@@ -2,16 +2,16 @@
 <img src="https://camo.githubusercontent.com/82291b0fe831bfc6781e07fc5090cbd0a8b912bb8b8d4fec0696c881834f81ac/68747470733a2f2f70726f626f742e6d656469612f394575424971676170492e676966" width="800" height="3">
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=ProPrivate&repo=PROMUSIC&theme=flag-india)
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=AimmXD&repo=PROMUSIC&theme=flag-india)
 
-[![GIF](https://github.com/ProPrivate/PROMUSIC/blob/main/Zeo.gif)](https://github.com/ProPrivate)
-   [![Zeo](https://github-stats-alpha.vercel.app/api?username=ProPrivate "Zeo")](https://github-stats-alpha.vercel.app/api?username=Zeo "Zeo")
-
-
+[![GIF](https://github.com/AimmXD/PROMUSIC/blob/main/Zeo.gif)](https://github.com/AimmXD)
+   [![Zeo](https://github-stats-alpha.vercel.app/api?username=AimmXD "Zeo")](https://github-stats-alpha.vercel.app/api?username=Zeo "Zeo")
 
 
 
-GO TO [RELOAD.PY](https://github.com/ProPrivate/PROMUSIC/blob/Master/PROMUSIC/plugins/tools/reload.py) THEN CHANGE MY ID NUMBER 
+
+
+GO TO [RELOAD.PY](https://github.com/AimmXD/PROMUSIC/blob/Master/PROMUSIC/plugins/tools/reload.py) THEN CHANGE MY ID NUMBER 
 
 <p align="center">
   <img width="500" src="https://telegra.ph/file/93fe8699ccadb924effad.jpg">
@@ -25,9 +25,9 @@ GO TO [RELOAD.PY](https://github.com/ProPrivate/PROMUSIC/blob/Master/PROMUSIC/pl
     ─「 ᴅᴇᴩʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ 」─
 </h3>
 
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/ProPrivate/PROMUSIC"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-pink?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/AimmXD/PROMUSIC"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-pink?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 
-<p><img width="300" align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ProPrivate&show_icons=true&locale=en&layout=compact" alt="ProPrivate" /></p>
+<p><img width="300" align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=AimmXD&show_icons=true&locale=en&layout=compact" alt="AimmXD" /></p>
 
 ### Contact :
 <a href="https://t.me/ProBotGc"><img title="Telegram" src="https://img.shields.io/badge/Telegram-%23000000.svg?&style=for-the-badge&logo=telegram&logoColor=61DAFB"></a>
