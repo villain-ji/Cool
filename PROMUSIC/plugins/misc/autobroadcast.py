@@ -65,4 +65,4 @@ async def continuous_broadcast():
         await asyncio.sleep(82800)  # Sleep (82800 seconds) between next broadcast
 
 # Start the continuous broadcast loop
-asyncio.create_task(continuous_broadcast())
+# asyncio.create_task(continuous_broadcast())
