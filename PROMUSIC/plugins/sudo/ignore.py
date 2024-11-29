@@ -44,12 +44,12 @@ async def ignored_list(client, message: Message):
 
 # Automatically delete messages if an ignored user mentions the owner
 
-# Custom filter to check if the user is in the ignored list
-async def user_in_ignored_list(message: Message) -> bool:
+# Custom filter function to check if the user is in the ignored list
+async def is_ignored_user(message: Message) -> bool:
     ignored_users = await get_ignored_users()  # Fetch ignored users from the database
-    return message.from_user.id in ignored_users  # Return True if the user is ignored
+    return message.from_user.id in ignored_users  # Check if the user is in the ignored list
 
-IGNORED_USERS = filters.create(user_in_ignored_list)
+IGNORED_USERS = filters.create(is_ignored_user)
 
 @app.on_message(filters.group & filters.text & IGNORED_USERS)
 async def handle_mentions(client, message: Message):
@@ -57,7 +57,7 @@ async def handle_mentions(client, message: Message):
     mentioned_owner = False
     if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
         mentioned_owner = True
-
+    
     # Check for mentions in the message text
     owner_mentions = [OWNER_USERNAME, "Zeo"]  # Add variations of your name/username
     if message.entities:
@@ -74,9 +74,12 @@ async def handle_mentions(client, message: Message):
     if not mentioned_owner:
         return
 
-    try:
-        # Delete the message and send the "Fuck off" message
-        await message.delete()
-        await message.reply_text(f"Fuck off, {message.from_user.mention} !!")
-    except Exception as e:
-        print(f"Error in deleting or replying: {e}")
+    # Check if the user is in the ignore list
+    is_ignored = await is_ignored_user(message.from_user.id)
+    if is_ignored:
+        try:
+            # Delete the message and send the "Fuck off" message
+            await message.delete()
+            await message.reply_text(f"Fuck off, {message.from_user.mention} !!")
+        except Exception as e:
+            print(f"Error in deleting or replying: {e}")
