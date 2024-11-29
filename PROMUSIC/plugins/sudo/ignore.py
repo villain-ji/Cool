@@ -42,6 +42,38 @@ async def ignored_list(client, message: Message):
         ignored_text += f"- {user_id}\n"
     await message.reply_text(ignored_text)
 
+
+
 # Automatically delete messages if an ignored user mentions the owner
 
+@app.on_message(filters.group & filters.text)
+async def handle_mentions(client, message: Message):
+    try:
+        # Check if the user is in the ignore list
+        is_ignored = await is_ignored_user(message.from_user.id)
+        if is_ignored:
+            return  # Ignore the message completely if the user is in the ignored list
+        
+        # Check if message is a reply or contains a mention
+        if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
+            mentioned_owner = True
+        elif message.entities:
+            mentioned_owner = any(
+                entity.type == "mention" and f"@{OWNER_USERNAME}" in message.text
+                for entity in message.entities
+            )
+        else:
+            mentioned_owner = False
+
+        if not mentioned_owner:
+            return  # Ignore if the message doesn't mention the owner or is not a reply to their message
+
+        # Check if the user is in the ignore list again (optional, in case of a mention)
+        if is_ignored:
+            # Delete the message and send a "Fuck off" message
+            await message.delete()
+            await message.reply_text(f"Fuck off {message.from_user.mention}.")
+    
+    except Exception as e:
+        print(f"Error in processing message: {e}")
 
