@@ -22,6 +22,7 @@ playtypedb = mongodb.playtypedb
 skipdb = mongodb.skipmode
 sudoersdb = mongodb.sudoers
 usersdb = mongodb.tgusersdb
+ignoredb = mongodb.ignorelist #ignore
 
 # Shifting to memory [mongo sucks often]
 active = []
@@ -646,4 +647,24 @@ async def remove_banned_user(user_id: int):
         return
     return await blockeddb.delete_one({"user_id": user_id})
 
+#ignore -------------------------
 
+async def is_ignored_user(user_id: int) -> bool:
+    user = await ignoredb.find_one({"user_id": user_id})
+    return bool(user)
+
+async def add_ignored_user(user_id: int):
+    if not await is_ignored_user(user_id):
+        await ignoredb.insert_one({"user_id": user_id})
+
+async def remove_ignored_user(user_id: int):
+    if await is_ignored_user(user_id):
+        await ignoredb.delete_one({"user_id": user_id})
+
+async def get_ignored_users():
+    users = []
+    async for user in ignoredb.find():
+        users.append(user["user_id"])
+    return users
+
+#ignore -------------------------
