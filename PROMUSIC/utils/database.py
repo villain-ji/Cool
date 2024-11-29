@@ -667,4 +667,5 @@ async def get_ignored_users():
         users.append(user["user_id"])
     return users
 
+
 #ignore -------------------------
