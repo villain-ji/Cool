@@ -667,5 +667,9 @@ async def get_ignored_users():
         users.append(user["user_id"])
     return users
 
-
+async def get_ignored_userd():
+    ignored_users = []
+    async for user in ignoredb.find():  # Find all documents in the ignoredb collection
+        ignored_users.append(user["user_id"])  # Assuming your collection has the field "user_id"
+    return ignored_users
 #ignore -------------------------
