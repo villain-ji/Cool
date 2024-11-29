@@ -51,7 +51,7 @@ async def user_in_ignored_list(message: Message) -> bool:
 
 IGNORED_USERS = filters.create(user_in_ignored_list)
 
-@app.on_message(filters.group & filters.text & custom_filter)
+@app.on_message(filters.group & filters.text & IGNORED_USERS)
 async def handle_mentions(client, message: Message):
     # Check if message is a reply to the owner
     mentioned_owner = False
