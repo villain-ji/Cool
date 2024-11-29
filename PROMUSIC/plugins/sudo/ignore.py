@@ -51,13 +51,13 @@ async def user_in_ignored_list(message: Message) -> bool:
 
 IGNORED_USERS = filters.create(user_in_ignored_list)
 
-@app.on_message(filters.group & filters.text & filters.user(IGNORED_USERS))
+@app.on_message(filters.group & filters.text & custom_filter)
 async def handle_mentions(client, message: Message):
     # Check if message is a reply to the owner
     mentioned_owner = False
     if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
         mentioned_owner = True
-    
+
     # Check for mentions in the message text
     owner_mentions = [OWNER_USERNAME, "Zeo"]  # Add variations of your name/username
     if message.entities:
@@ -74,12 +74,9 @@ async def handle_mentions(client, message: Message):
     if not mentioned_owner:
         return
 
-    # Check if the user is in the ignore list
-    is_ignored = await is_ignored_user(message.from_user.id)
-    if is_ignored:
-        try:
-            # Delete the message and send the "Fuck off" message
-            await message.delete()
-            await message.reply_text(f"Fuck off, {message.from_user.mention} !!")
-        except Exception as e:
-            print(f"Error in deleting or replying: {e}")
+    try:
+        # Delete the message and send the "Fuck off" message
+        await message.delete()
+        await message.reply_text(f"Fuck off, {message.from_user.mention} !!")
+    except Exception as e:
+        print(f"Error in deleting or replying: {e}")
