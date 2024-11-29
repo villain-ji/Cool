@@ -44,34 +44,39 @@ async def ignored_list(client, message: Message):
 
 # Automatically delete messages if an ignored user mentions the owner
 
-@app.on_message(filters.group & filters.text)
+# Custom filter to check if the user is in the ignored list
+async def user_in_ignored_list(message: Message) -> bool:
+    ignored_users = await get_ignored_users()  # Fetch ignored users from the database
+    return message.from_user.id in ignored_users  # Return True if the user is ignored
+
+IGNORED_USERS = filters.create(user_in_ignored_list)
+
+@app.on_message(filters.group & filters.text & filters.user(IGNORED_USERS))
 async def handle_mentions(client, message: Message):
-    # Fetch ignored users from the database
-    ignored_users = await get_ignored_users()
+    # Check if message is a reply to the owner
+    mentioned_owner = False
+    if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
+        mentioned_owner = True
+    
+    # Check for mentions in the message text
+    owner_mentions = [OWNER_USERNAME, "Zeo"]  # Add variations of your name/username
+    if message.entities:
+        for entity in message.entities:
+            if entity.type == "mention":
+                mentioned_text = message.text[entity.offset:entity.offset + entity.length]
+                if mentioned_text in [f"@{OWNER_USERNAME}"]:
+                    mentioned_owner = True
 
-    # Check if the message sender is in the ignored users list
-    if message.from_user.id in ignored_users:
-        # Check if message is a reply to the owner
-        mentioned_owner = False
-        if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
-            mentioned_owner = True
+    # Check for name-based mentions in the text
+    if any(name in message.text for name in owner_mentions):
+        mentioned_owner = True
 
-        # Check for mentions in the message text
-        owner_mentions = [OWNER_USERNAME, "Zeo"]  # Add variations of your name/username
-        if message.entities:
-            for entity in message.entities:
-                if entity.type == "mention":
-                    mentioned_text = message.text[entity.offset:entity.offset + entity.length]
-                    if mentioned_text in [f"@{OWNER_USERNAME}"]:
-                        mentioned_owner = True
+    if not mentioned_owner:
+        return
 
-        # Check for name-based mentions in the text
-        if any(name in message.text for name in owner_mentions):
-            mentioned_owner = True
-
-        if not mentioned_owner:
-            return
-
+    # Check if the user is in the ignore list
+    is_ignored = await is_ignored_user(message.from_user.id)
+    if is_ignored:
         try:
             # Delete the message and send the "Fuck off" message
             await message.delete()
