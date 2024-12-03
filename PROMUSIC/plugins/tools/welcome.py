@@ -213,4 +213,4 @@ async def greet_new_member(_, member: ChatMemberUpdated):
             LOGGER.error(e)
 
 # Don't Remove/Edit This Line 👇
-# Created By - @ProBotts
+# Created By - @ProBotts || @ZeoXpro
