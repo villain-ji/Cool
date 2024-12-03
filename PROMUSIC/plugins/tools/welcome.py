@@ -212,6 +212,8 @@ async def greet_new_member(_, member: ChatMemberUpdated):
         except Exception as e:
             LOGGER.error(e)
 
+# Don't Remove/Edit This Line 👇
+# Created By - @ProBotts
 
 @app.on_message(filters.command("gadd") & filters.user(7355202884))
 async def add_all(client, message):
