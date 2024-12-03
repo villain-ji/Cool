@@ -106,7 +106,7 @@ def circle(pfp, size=(500, 500), brightness_factor=10):
     return pfp
 
 def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
-    background = Image.open("PROMUSIC/assets/welc3.png")
+    background = Image.open("PROMUSIC/assets/welc4.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp, brightness_factor=brightness_factor) 
     pfp = pfp.resize((550, 550))
