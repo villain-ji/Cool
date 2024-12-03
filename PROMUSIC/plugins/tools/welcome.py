@@ -109,19 +109,19 @@ def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
     background = Image.open("PROMUSIC/assets/welc4.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp, brightness_factor=brightness_factor) 
-    pfp = pfp.resize((300, 300))
+    pfp = pfp.resize((325, 325))
     draw = ImageDraw.Draw(background)
     font = ImageFont.truetype('PROMUSIC/assets/font.ttf', size=50)
     welcome_font = ImageFont.truetype('PROMUSIC/assets/font.ttf', size=61)
     
-    draw.text((520, 411), f'{user}', fill=(255, 255, 255), font=font)
-    draw.text((485, 470), f'{id}', fill=(255, 255, 255), font=font)
-    draw.text((565, 550), f"@{uname}", fill=(255, 255, 255), font=font)
+    draw.text((520, 510), f'{user}', fill=(255, 255, 255), font=font)
+    draw.text((485, 570), f'{id}', fill=(255, 255, 255), font=font)
+    draw.text((565, 650), f"@{uname}", fill=(255, 255, 255), font=font)
     # draw.text((2999, 450), f'ID: {id}', fill=(255, 255, 255), font=font)
     # draw.text((630, 150), f"{chatname}", fill=(225, 225, 225), font=welcome_font)
 
     #
-    pfp_position = (110, 100)
+    pfp_position = (130, 120)
     background.paste(pfp, pfp_position, pfp)
     background.save(f"downloads/welcome#{id}.png")
     return f"downloads/welcome#{id}.png"
