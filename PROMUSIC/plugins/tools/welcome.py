@@ -111,14 +111,14 @@ def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
     background = Image.open("PROMUSIC/assets/wel3.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp, brightness_factor=brightness_factor) 
-    pfp = pfp.resize((550, 550))
+    pfp = pfp.resize((500, 500))
     draw = ImageDraw.Draw(background)
-    font = ImageFont.truetype('PROMUSIC/assets/font.ttf', size=70)
+    font = ImageFont.truetype('PROMUSIC/assets/font.ttf', size=130)
     welcome_font = ImageFont.truetype('PROMUSIC/assets/font.ttf', size=61)
     
-    draw.text((624, 778), f'{user}', fill=(0, 0, 0), font=font)
-    draw.text((415, 850), f'{id}', fill=(0, 0, 0), font=font)
-    draw.text((900, 975), f"@{uname}", fill=(0, 0, 0), font=font)
+    draw.text((524, 778), f'{user}', fill=(0, 0, 0), font=font)
+    draw.text((315, 850), f'{id}', fill=(0, 0, 0), font=font)
+    draw.text((700, 975), f"@{uname}", fill=(0, 0, 0), font=font)
 
     #
     pfp_position = (162, 161)
