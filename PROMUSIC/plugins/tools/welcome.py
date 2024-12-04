@@ -116,9 +116,9 @@ def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
     font = ImageFont.truetype('PROMUSIC/assets/fonts.ttf', size=110)
     welcome_font = ImageFont.truetype('PROMUSIC/assets/font.ttf', size=61)
     
-    draw.text((490, 778), f'{user}', fill=(0, 0, 0), font=font)
-    draw.text((315, 890), f'{id}', fill=(0, 0, 0), font=font)
-    draw.text((700, 1010), f"@{uname}", fill=(0, 0, 0), font=font)
+    draw.text((490, 778), f'{user}', fill=(23, 156, 241), font=font)
+    draw.text((315, 890), f'{id}', fill=(34, 34, 34), font=font)
+    draw.text((700, 1010), f"@{uname}", fill=(34, 34, 34), font=font)
 
     #
     pfp_position = (162, 161)
