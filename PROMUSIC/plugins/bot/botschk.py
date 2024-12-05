@@ -14,7 +14,7 @@ last_checked_time = None
 BOT_LIST = ["NezukoProBot", "SiriProBot", "ShizukaProBot"]
 
 
-@app.on_message(filters.command("runchk") & filters.user(OWNER_ID))
+@app.on_message(filters.command("botschk") & filters.user(OWNER_ID))
 async def bots_chk(_, message):
     global last_checked_time
 
