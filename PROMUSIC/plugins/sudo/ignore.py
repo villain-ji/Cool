@@ -56,7 +56,7 @@ IGNORED_USERS = [6348268237]  # Add more user IDs as needed
 @app.on_message(filters.group & filters.text)
 async def handle_mentions(client, message: Message):
     # Check if the user is in the ignore list
-    if message.from_user.id in IGNORED_USERS:
+    if await is_ignored_user(message.from_user.id):
         # Check if message is a reply to the owner
         mentioned_owner = False
         if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
