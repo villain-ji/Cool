@@ -83,15 +83,16 @@ async def handle_mentions(client, message: Message):
             except Exception as e:
                 print(f"Error in deleting or replying: {e}")
 
+
+
 # Command to dynamically add a user to the ignore list
 @app.on_message(filters.command("ignore_user") & filters.user(OWNER_ID))
-async def add_ignored_user(client, message: Message):
+async def add_ignored_user_command(client, message: Message):
     try:
-        # Extract user ID from the command
         if len(message.command) > 1:
             user_id = int(message.command[1])
-            if user_id not in IGNORED_USERS:
-                IGNORED_USERS.append(user_id)
+            if not await is_ignored_user(user_id):
+                await add_ignored_user(user_id)
                 await message.reply_text(f"User {user_id} has been added to the ignore list.")
             else:
                 await message.reply_text(f"User {user_id} is already in the ignore list.")
@@ -102,12 +103,12 @@ async def add_ignored_user(client, message: Message):
 
 # Command to dynamically remove a user from the ignore list
 @app.on_message(filters.command("unignore_user") & filters.user(OWNER_ID))
-async def remove_ignored_user(client, message: Message):
+async def remove_ignored_user_command(client, message: Message):
     try:
         if len(message.command) > 1:
             user_id = int(message.command[1])
-            if user_id in IGNORED_USERS:
-                IGNORED_USERS.remove(user_id)
+            if await is_ignored_user(user_id):
+                await remove_ignored_user(user_id)
                 await message.reply_text(f"User {user_id} has been removed from the ignore list.")
             else:
                 await message.reply_text(f"User {user_id} is not in the ignore list.")
