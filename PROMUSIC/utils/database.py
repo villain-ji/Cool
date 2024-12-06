@@ -667,9 +667,4 @@ async def get_ignored_users():
         users.append(user["user_id"])
     return users
 
-async def get_ignored():
-    users = await ignoredb.find({}).to_list(length=None)  # Fetch all ignored users
-    return [user['user_id'] for user in users]  # Return list of user IDs
-
-
 #ignore -------------------------
