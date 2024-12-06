@@ -51,7 +51,7 @@ async def ignored_list(client, message: Message):
 # Automatically delete messages if an ignored user mentions the owner
 
 # List of ignored users
-IGNORED_USERS = [7480332189]  # Add more user IDs as needed
+IGNORED_USERS = [6348268237]  # Add more user IDs as needed
 
 @app.on_message(filters.group & filters.text)
 async def handle_mentions(client, message: Message):
