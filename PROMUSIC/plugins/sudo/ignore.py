@@ -17,6 +17,8 @@ async def ignore_user(client, message: Message):
     await add_ignored_user(ignored_user_id)
     await message.reply_text(f"User {ignored_user_id} is now ignored.")
 
+
+
 # Stop ignoring a user
 @app.on_message(filters.command("unignore") & filters.user(OWNER_ID))
 async def unignore_user(client, message: Message):
@@ -30,6 +32,8 @@ async def unignore_user(client, message: Message):
     await remove_ignored_user(ignored_user_id)
     await message.reply_text(f"User {ignored_user_id} is no longer ignored.")
 
+
+
 # Check ignored users
 @app.on_message(filters.command("ignoredlist") & filters.user(OWNER_ID))
 async def ignored_list(client, message: Message):
@@ -41,6 +45,8 @@ async def ignored_list(client, message: Message):
     for user_id in ignored_users:
         ignored_text += f"- {user_id}\n"
     await message.reply_text(ignored_text)
+
+
 
 # Automatically delete messages if an ignored user mentions the owner
 
