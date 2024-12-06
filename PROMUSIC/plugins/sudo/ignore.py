@@ -104,7 +104,6 @@ async def add_ignored_user(client, message: Message):
 @app.on_message(filters.command("unignore_user") & filters.user(OWNER_ID))
 async def remove_ignored_user(client, message: Message):
     try:
-        # Extract user ID from the command
         if len(message.command) > 1:
             user_id = int(message.command[1])
             if user_id in IGNORED_USERS:
