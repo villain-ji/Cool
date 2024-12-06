@@ -53,33 +53,33 @@ async def ignored_list(client, message: Message):
 # List of ignored users
 IGNORED_USERS = [6348268237]  # Add more user IDs as needed
 
-@app.on_message(filters.group & filters.text)
-async def handle_mentions(client, message: Message):
-    # Check if the user is in the ignore list
-    if await is_ignored_user(message.from_user.id):
-        # Check if message is a reply to the owner
-        mentioned_owner = False
-        if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
-            mentioned_owner = True
+# @app.on_message(filters.group & filters.text)
+# async def handle_mentions(client, message: Message):
+#     # Check if the user is in the ignore list
+#     if await is_ignored_user(message.from_user.id):
+#         # Check if message is a reply to the owner
+#         mentioned_owner = False
+#         if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
+#             mentioned_owner = True
 
-        # Check for mentions in the message text
-        owner_mentions = [OWNER_USERNAME, "Zeo", "zeo", "ZEO", "ZEo", "zEO", "zeoo"]  # Add variations of your name/username
-        if message.entities:
-            for entity in message.entities:
-                if entity.type == "mention":
-                    mentioned_text = message.text[entity.offset:entity.offset + entity.length]
-                    if mentioned_text in [f"@{OWNER_USERNAME}"]:
-                        mentioned_owner = True
+#         # Check for mentions in the message text
+#         owner_mentions = [OWNER_USERNAME, "Zeo", "zeo", "ZEO", "ZEo", "zEO", "zeoo"]  # Add variations of your name/username
+#         if message.entities:
+#             for entity in message.entities:
+#                 if entity.type == "mention":
+#                     mentioned_text = message.text[entity.offset:entity.offset + entity.length]
+#                     if mentioned_text in [f"@{OWNER_USERNAME}"]:
+#                         mentioned_owner = True
 
-        # Check for name-based mentions in the text
-        if any(name in message.text for name in owner_mentions):
-            mentioned_owner = True
+#         # Check for name-based mentions in the text
+#         if any(name in message.text for name in owner_mentions):
+#             mentioned_owner = True
 
-        if mentioned_owner:
-            try:
-                # Delete the message and send the "Fuck off" message
-                await message.delete()
-                await message.reply_text(f"Fuck off, {message.from_user.mention} !!")
-            except Exception as e:
-                print(f"Error in deleting or replying: {e}")
+#         if mentioned_owner:
+#             try:
+#                 # Delete the message and send the "Fuck off" message
+#                 await message.delete()
+#                 await message.reply_text(f"Fuck off, {message.from_user.mention} !!")
+#             except Exception as e:
+#                 print(f"Error in deleting or replying: {e}")
 
