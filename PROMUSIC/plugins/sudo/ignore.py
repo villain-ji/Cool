@@ -63,7 +63,7 @@ async def handle_mentions(client, message: Message):
             mentioned_owner = True
 
         # Check for mentions in the message text
-        owner_mentions = [OWNER_USERNAME, "Zeo"]  # Add variations of your name/username
+        owner_mentions = [OWNER_USERNAME, "Zeo", "zeo", "ZEO", "ZEo", "zEO", "zeoo"]  # Add variations of your name/username
         if message.entities:
             for entity in message.entities:
                 if entity.type == "mention":
