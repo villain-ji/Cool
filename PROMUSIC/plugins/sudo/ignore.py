@@ -3,10 +3,12 @@ from pyrogram.types import Message
 from PROMUSIC import app
 from PROMUSIC.misc import IGNORED
 from config import OWNER_ID, OWNER_USERNAME  # Replace this with the specific owner ID
+from PROMUSIC.utils.decorators.language import language
 from PROMUSIC.utils.database import add_ignored_user, is_ignored_user, remove_ignored_user, get_ignored_users
 
 # Ignore a user
-@app.on_message(filters.command("ignore") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["ignore"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & filters.user(OWNER_ID))
+@language
 async def ignore_user(client, message: Message):
     if not message.reply_to_message:
         return await message.reply_text("Reply to a user's message to ignore them.")
@@ -17,7 +19,7 @@ async def ignore_user(client, message: Message):
     
     await add_ignored_user(ignored_user_id)
     IGNORED.add(ignored_user_id)
-    await message.reply_text(f"User {ignored_user_id} is now ignored.")
+    await message.reply_text(f"Ohk Boss Ab {message.reply_to_message.from_user.mention} ko Ignore Karna Start.")
 
 
 # Stop ignoring a user
@@ -32,7 +34,7 @@ async def unignore_user(client, message: Message):
     
     await remove_ignored_user(ignored_user_id)
     IGNORED.discard(ignored_user_id)
-    await message.reply_text(f"User {ignored_user_id} is no longer ignored.")
+    await message.reply_text(f"Ohk Boss Ab {message.reply_to_message.from_user.mention} ko Ignore Nhi Krenge.")
 
 # Check ignored users
 @app.on_message(filters.command("ignoredlist") & filters.user(OWNER_ID))
@@ -41,7 +43,7 @@ async def ignored_list(client, message: Message):
     if not ignored_users:
         return await message.reply_text("No users are currently ignored.")
     
-    ignored_text = "Ignored Users:\n"
+    ignored_text = "Ignored Users:\n\n"
     for user_id in ignored_users:
         ignored_text += f"- {user_id}\n"
     await message.reply_text(ignored_text)
@@ -89,6 +91,6 @@ async def handle_mentions(client, message: Message):
         try:
             # Delete the message and send the "Fuck off" message
             await message.delete()
-            await message.reply_text(f"Fuck off, {message.from_user.mention} !!")
+            await message.reply_text(f"Fuck off, {message.from_user.mention} !!\n\n - @ZeoXD")
         except Exception as e:
             print(f"Error in deleting or replying: {e}")
