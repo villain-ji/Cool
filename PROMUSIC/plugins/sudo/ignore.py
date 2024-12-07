@@ -16,7 +16,9 @@ async def ignore_user(client, message: Message):
         return await message.reply_text("This user is already ignored.")
     
     await add_ignored_user(ignored_user_id)
+    IGNORED.add(ignored_user_id)
     await message.reply_text(f"User {ignored_user_id} is now ignored.")
+
 
 # Stop ignoring a user
 @app.on_message(filters.command("unignore") & filters.user(OWNER_ID))
@@ -29,6 +31,7 @@ async def unignore_user(client, message: Message):
         return await message.reply_text("This user is not in the ignore list.")
     
     await remove_ignored_user(ignored_user_id)
+    IGNORED.discard(ignored_user_id)
     await message.reply_text(f"User {ignored_user_id} is no longer ignored.")
 
 # Check ignored users
@@ -54,7 +57,7 @@ async def handle_mentions(client, message: Message):
     if message.text.startswith("/"):  # Modify this check if you use a different prefix for commands
         return
     
-    
+
     mentioned_owner = False
     if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
         mentioned_owner = True
