@@ -66,13 +66,8 @@ async def handle_mentions(client, message: Message):
     owner_mentions = [
     OWNER_USERNAME.lower(),  # Your username in lowercase
     OWNER_USERNAME.upper(),  # Your username in uppercase
-    OWNER_USERNAME.capitalize(),  # First letter capitalized
-    "Zeo", "zeo", "ZeoXD", "zeoxd",  # Nicknames/shortened forms
-    "Zeo_XD", "Zeo.XD", "Zeo-XD",  # Variations with symbols
-    "Zeo0", "ZeoX",  # Some potential number-based variations
-    "ZeoMaster", "ZeoKing",  # Some possible exaggerated variations
-    "@Zeo", "@zeo", "@ZeoXD",  # Mentions with @ symbol
-    "@Zeo_XD", "@Zeo.XD", "@Zeo-XD"  # Variations of @ mention
+    OWNER_USERNAME.capitalize(),
+    "Zeo", "zeo", "ZeoXD", "zeoxd", "ZEO", "zEO", "zEo", "ZeO", "ZEOXD", "@ZEOXD"
 ]  # Add variations of your name/username
     if message.entities:
         for entity in message.entities:
