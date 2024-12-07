@@ -50,6 +50,11 @@ MAIN = 7480332189
 @app.on_message(filters.group & filters.text & IGNORED)
 async def handle_mentions(client, message: Message):
     # Check if message is a reply to the owner
+
+    if message.text.startswith("/"):  # Modify this check if you use a different prefix for commands
+        return
+    
+    
     mentioned_owner = False
     if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
         mentioned_owner = True
