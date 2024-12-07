@@ -37,7 +37,6 @@ async def unignore_user(client, message: Message):
 
 # Check ignored users
 @app.on_message(filters.command(["iglist", "ignored"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & filters.user(OWNER_ID))
-@language
 async def ignored_list(client, message: Message):
     ignored_users = await get_ignored_users()
     if not ignored_users:
