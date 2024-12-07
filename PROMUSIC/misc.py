@@ -66,18 +66,16 @@ async def sudo():
 
 async def ignore():
     global IGNORED
-    ignoredb = mongodb.ignorelist
+    ignoredb = mongodb.ignorelist  # Reference your MongoDB collection
+    ignorelist = await ignoredb.find().to_list(length=None)  # Fetch all documents
     
-    # Fetch all documents in the collection
-    ignorelist = await ignoredb.find().to_list(length=None)
-    
-    # Add each `user_id` to the IGNORED filter
+    # Iterate through each document and extract the `user_id`
     for document in ignorelist:
-        user_id = document.get("user_id")
-        if user_id:
-            IGNORED.add(user_id)
-    
-    LOGGER(__name__).info("Ignored users loaded successfully.")
+        user_id = document.get("user_id")  # Get the user_id field
+        if user_id:  # Ensure user_id exists and is valid
+            IGNORED.add(user_id)  # Add the user_id to the IGNORED filter
+
+    LOGGER(__name__).info(f"IGNORED users loaded: {[doc['user_id'] for doc in ignorelist]}")
 
 async def update_subscriber_ids():
     global SUBSCRIBERS
