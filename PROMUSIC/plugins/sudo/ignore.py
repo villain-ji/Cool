@@ -8,7 +8,6 @@ from PROMUSIC.utils.database import add_ignored_user, is_ignored_user, remove_ig
 
 # Ignore a user
 @app.on_message(filters.command(["ignore"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & filters.user(OWNER_ID))
-@language
 async def ignore_user(client, message: Message):
     if not message.reply_to_message:
         return await message.reply_text("Reply to a user's message to ignore them.")
@@ -23,7 +22,7 @@ async def ignore_user(client, message: Message):
 
 
 # Stop ignoring a user
-@app.on_message(filters.command("unignore") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["unignore"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & filters.user(OWNER_ID))
 async def unignore_user(client, message: Message):
     if not message.reply_to_message:
         return await message.reply_text("Reply to a user's message to unignore them.")
@@ -45,7 +44,8 @@ async def ignored_list(client, message: Message):
     
     ignored_text = "Ignored Users:\n\n"
     for user_id in ignored_users:
-        ignored_text += f"- {user_id}\n"
+        name = (await app.get_users(user_id)).mention
+        ignored_text += f"- {name}\n"
     await message.reply_text(ignored_text)
 
 # Automatically delete messages if an ignored user mentions the owner
