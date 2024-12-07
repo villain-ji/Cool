@@ -12,6 +12,7 @@ from .logging import LOGGER
 SUDOERS = filters.user()
 
 SUBSCRIBERS = filters.user()
+IGNORED = filters.user()
 
 HAPP = None
 _boot_ = time.time()
@@ -61,6 +62,22 @@ async def sudo():
         for user_id in sudoers:
             SUDOERS.add(user_id)
     LOGGER(__name__).info(f"𝗦𝗨𝗗𝗢 𝗨𝗦𝗘𝗥 𝗗𝗢𝗡𝗘✨🎋.")
+
+
+async def ignore():
+    global IGNORED
+    ignoredb = mongodb.ignorelist
+    
+    # Fetch all documents in the collection
+    ignorelist = await ignoredb.find().to_list(length=None)
+    
+    # Add each `user_id` to the IGNORED filter
+    for document in ignorelist:
+        user_id = document.get("user_id")
+        if user_id:
+            IGNORED.add(user_id)
+    
+    LOGGER(__name__).info("Ignored users loaded successfully.")
 
 async def update_subscriber_ids():
     global SUBSCRIBERS

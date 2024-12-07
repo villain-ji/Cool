@@ -1,6 +1,7 @@
 from pyrogram import filters
 from pyrogram.types import Message
 from PROMUSIC import app
+from PROMUSIC.misc import IGNORED
 from config import OWNER_ID, OWNER_USERNAME  # Replace this with the specific owner ID
 from PROMUSIC.utils.database import add_ignored_user, is_ignored_user, remove_ignored_user, get_ignored_users
 
@@ -46,7 +47,7 @@ async def ignored_list(client, message: Message):
 
 MAIN = 7480332189
 
-@app.on_message(filters.group & filters.text & filters.user(MAIN))
+@app.on_message(filters.group & filters.text & IGNORED)
 async def handle_mentions(client, message: Message):
     # Check if message is a reply to the owner
     mentioned_owner = False
