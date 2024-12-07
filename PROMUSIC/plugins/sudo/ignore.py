@@ -22,7 +22,7 @@ async def ignore_user(client, message: Message):
 
 
 # Stop ignoring a user
-@app.on_message(filters.command(["unignore"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & filters.user(OWNER_ID))
+@app.on_message(filters.command(["unignore", "rmignore"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & filters.user(OWNER_ID))
 async def unignore_user(client, message: Message):
     if not message.reply_to_message:
         return await message.reply_text("Reply to a user's message to unignore them.")
@@ -36,7 +36,8 @@ async def unignore_user(client, message: Message):
     await message.reply_text(f"Ohk Boss Ab {message.reply_to_message.from_user.mention} ko Ignore Nhi Krenge.")
 
 # Check ignored users
-@app.on_message(filters.command("ignoredlist") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["iglist", "ignored"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & filters.user(OWNER_ID))
+@language
 async def ignored_list(client, message: Message):
     ignored_users = await get_ignored_users()
     if not ignored_users:
