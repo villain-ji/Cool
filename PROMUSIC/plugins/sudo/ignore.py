@@ -59,23 +59,20 @@ async def handle_mentions(client, message: Message):
     
 
     mentioned_owner = False
-
-    message_text_lower = message.text.lower()
-
     if message.reply_to_message and message.reply_to_message.from_user.id == OWNER_ID:
         mentioned_owner = True
     
     # Check for mentions in the message text
-    owner_mentions = [OWNER_USERNAME.lower(), "Zeo"]  # Add variations of your name/username
+    owner_mentions = [OWNER_USERNAME, "Zeo"]  # Add variations of your name/username
     if message.entities:
         for entity in message.entities:
             if entity.type == "mention":
-                mentioned_text = message.text[entity.offset:entity.offset + entity.length].lower()
-                if mentioned_text in [f"@{OWNER_USERNAME.lower()}"]:
+                mentioned_text = message.text[entity.offset:entity.offset + entity.length]
+                if mentioned_text in [f"@{OWNER_USERNAME}"]:
                     mentioned_owner = True
 
     # Check for name-based mentions in the text
-    if any(name in message_text_lower for name in owner_mentions):
+    if any(name in message.text for name in owner_mentions):
         mentioned_owner = True
 
     if not mentioned_owner:
