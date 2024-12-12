@@ -23,10 +23,10 @@ IS_BROADCASTING = False
 @app.on_message(filters.command("broadcast") & SUDOERS)
 @language
 async def braodcast_message(client, message, _):
-    if message.from_user.id != MAIN_OWNER:
-        return await message.reply_text(
-            f"» 🚀 Wᴀɴᴛ ᴛᴏ ʙʀᴏᴀᴅᴄᴀsᴛ ʏᴏᴜʀ ᴏᴡɴ ᴍᴇssᴀɢᴇs?\n\nUɴʟᴏᴄᴋ ᴇxᴄʟᴜsɪᴠᴇ ᴀᴄᴄᴇss ᴡɪᴛʜ ᴏᴜʀ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ᴘʟᴀɴ!\n Jᴏɪɴ [PʀᴏBᴏᴛs]({SUPPORT_CHAT}) ᴏʀ DM @ZeoXD ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs ᴀɴᴅ ɢᴇᴛ sᴛᴀʀᴛᴇᴅ !"
-        )
+    # if message.from_user.id != MAIN_OWNER:
+    #     return await message.reply_text(
+    #         f"» 🚀 Wᴀɴᴛ ᴛᴏ ʙʀᴏᴀᴅᴄᴀsᴛ ʏᴏᴜʀ ᴏᴡɴ ᴍᴇssᴀɢᴇs?\n\nUɴʟᴏᴄᴋ ᴇxᴄʟᴜsɪᴠᴇ ᴀᴄᴄᴇss ᴡɪᴛʜ ᴏᴜʀ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ᴘʟᴀɴ!\n Jᴏɪɴ [PʀᴏBᴏᴛs]({SUPPORT_CHAT}) ᴏʀ DM @ZeoXD ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs ᴀɴᴅ ɢᴇᴛ sᴛᴀʀᴛᴇᴅ !"
+    #     )
 
     global IS_BROADCASTING
     if message.reply_to_message:
