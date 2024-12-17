@@ -63,29 +63,6 @@ async def sudo():
             SUDOERS.add(user_id)
     LOGGER(__name__).info(f"𝗦𝗨𝗗𝗢 𝗨𝗦𝗘𝗥 𝗗𝗢𝗡𝗘✨🎋.")
 
-
-async def ignore():
-    global IGNORED
-    ignoredb = mongodb.ignorelist  # Reference your MongoDB collection
-    ignorelist = await ignoredb.find().to_list(length=None)  # Fetch all documents
-    
-    # Iterate through each document and extract the `user_id`
-    for document in ignorelist:
-        user_id = document.get("user_id")  # Get the user_id field
-        if user_id:  # Ensure user_id exists and is valid
-            IGNORED.add(user_id)  # Add the user_id to the IGNORED filter
-
-    LOGGER(__name__).info(f"IGNORED users loaded: {[doc['user_id'] for doc in ignorelist]}")
-
-async def update_subscriber_ids():
-    global SUBSCRIBERS
-    # Replace 'subscribersdb' with your actual MongoDB collection reference for subscribers
-    subscribersdb = mongodb.subscribers
-    subscribers = await subscribersdb.find().to_list(length=None)  # Fetch all subscribers
-    SUBSCRIBERS = {sub["user_id"] for sub in subscribers}  # Extract user IDs into a set
-
-    LOGGER(__name__).info(f"Subscriber IDs updated")
-
 def heroku():
     global HAPP
     if is_heroku:
