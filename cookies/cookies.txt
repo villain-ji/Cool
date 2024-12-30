@@ -1,6 +1,6 @@
 # Netscape HTTP Cookie File
 # https://curl.haxx.se/rfc/cookie_spec.html
-# This is a generated file! Do not edit.
+# This is a generated file!
 
 .youtube.com	TRUE	/	TRUE	1749966028	VISITOR_INFO1_LIVE	k5U_Ot_GYb8
 .youtube.com	TRUE	/	TRUE	1749966028	VISITOR_PRIVACY_METADATA	CgJJThIEGgAgWw%3D%3D
