@@ -71,6 +71,7 @@ demote = ["demote","lelo"]
 group = ["group"]
 channel = ["channel"]
 botleave = ["leave","nikal"]
+dlt = ["delete", "dlt"]
 
 
 
@@ -191,3 +192,17 @@ async def restriction_app(app :app, message):
             else:
                 await message.reply_text(random.choice(bot_leave_txt))
                 await app.leave_chat(message.chat.id)
+
+
+    # Deleting the replied message if a trigger word is found
+    for delete in data:
+        print(f"present {delete}")
+        if delete in dlt:  # Assuming `dlt` contains the trigger words
+            if user_id in SUDOERS:
+                await message.reply(random.choice(strict_txt))
+            else:
+                try:
+                    await reply.delete()  # Deletes the replied message
+                except Exception as e:
+                    print(f"Failed to delete the message. Error: {e}")
+                return
